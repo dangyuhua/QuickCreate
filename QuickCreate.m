@@ -7,7 +7,6 @@
 //
 
 #import "QuickCreate.h"
-#import <AudioToolbox/AudioToolbox.h>
 #import "FPSLabel.h"
 
 @interface QuickCreate()
@@ -71,7 +70,7 @@
 }
 
 //上拉下拉tableview
-+(UITableView *)UITableViewMJRefreshWithBackgroundColor:(UIColor *)color frame:(CGRect )frame style:(UITableViewStyle)style contentInset:(UIEdgeInsets )contentInset mjheadBlock:(void (^)(void))mjheadBlock mjfootBlock:(void (^)(void))mjfootBlock{
++(UITableView *)UITableViewMJRefreshWithBackgroundColor:(UIColor *)color frame:(CGRect )frame style:(UITableViewStyle)style contentInset:(UIEdgeInsets )contentInset footIsNeedDrag:(BOOL)footIsNeedDrag mjheadBlock:(void (^)(void))mjheadBlock mjfootBlock:(void (^)(void))mjfootBlock{
     
     UITableView *tableView = [[UITableView alloc]initWithFrame:frame style:style];
     if (@available(iOS 11.0, *)) {
@@ -90,15 +89,27 @@
     header.lastUpdatedTimeLabel.hidden = YES;
     header.stateLabel.hidden = YES;
     tableView.mj_header = header;
-    MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        mjfootBlock();
-    }];
-    footer.labelLeftInset = 0;
-    [footer setTitle:@"" forState:MJRefreshStateIdle];
-    [footer setTitle:@"" forState:MJRefreshStateWillRefresh];
-    [footer setTitle:@"" forState:MJRefreshStateRefreshing];
-    [footer setTitle:@"" forState:MJRefreshStateNoMoreData];
-    tableView.mj_footer = footer;
+    if (footIsNeedDrag) {
+        MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+            mjfootBlock();
+        }];
+        footer.labelLeftInset = 0;
+        [footer setTitle:@"" forState:MJRefreshStateIdle];
+        [footer setTitle:@"" forState:MJRefreshStateWillRefresh];
+        [footer setTitle:@"" forState:MJRefreshStateRefreshing];
+        [footer setTitle:@"" forState:MJRefreshStateNoMoreData];
+        tableView.mj_footer = footer;
+    }else{
+        MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+            mjfootBlock();
+        }];
+        footer.labelLeftInset = 0;
+        [footer setTitle:@"" forState:MJRefreshStateIdle];
+        [footer setTitle:@"" forState:MJRefreshStateWillRefresh];
+        [footer setTitle:@"" forState:MJRefreshStateRefreshing];
+        [footer setTitle:@"" forState:MJRefreshStateNoMoreData];
+        tableView.mj_footer = footer;
+    }
     return tableView;
 }
 //
@@ -398,7 +409,7 @@
     [formatter setDateFormat:@"yy-MM-dd HH:mm:ss"];
     NSDate *nowDate = [formatter dateFromString:time];
     NSInteger numtime = nowDate.timeIntervalSince1970;
-    NSString *numtimestr = [NSString stringWithFormat:@"%ld",numtime];
+    NSString *numtimestr = [NSString stringWithFormat:@"%ld",(long)numtime];
     return numtimestr;
 }
 //下载图片
@@ -606,7 +617,7 @@
 }
 //震动
 +(void)playVibrate{
-    AudioServicesPlaySystemSound(1007);  
+    AudioServicesPlaySystemSound(1007);
     AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
 }
 //image转data
