@@ -108,4 +108,8 @@
 +(void)FPSLabel;
 // 返回虚线image的方法
 +(UIImage *)drawLineByImageView:(UIImageView *)imageView lineColor:(UIColor *)color;
+//字典转JSON字符串
++(NSString *)dictionaryToJsonString:(NSDictionary *)dict;
+//JSON字符串转化为字典
++ (NSDictionary *)jsonStringToWithDictionary:(NSString *)jsonString;
 @end
