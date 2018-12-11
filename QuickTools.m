@@ -70,12 +70,13 @@
 }
 
 //上拉下拉tableview
-+(UITableView *)UITableViewMJRefreshWithBackgroundColor:(UIColor *)color frame:(CGRect )frame separatorStyle:(UITableViewCellSeparatorStyle )separatorStyle style:(UITableViewStyle)style contentInset:(UIEdgeInsets )contentInset footIsNeedDrag:(BOOL)footIsNeedDrag mjheadBlock:(void (^)(void))mjheadBlock mjfootBlock:(void (^)(void))mjfootBlock{
++(UITableView *)UITableViewMJRefreshWithBackgroundColor:(UIColor *)color frame:(CGRect )frame separatorStyle:(UITableViewCellSeparatorStyle )separatorStyle style:(UITableViewStyle)style contentInset:(UIEdgeInsets )contentInset indicator:(BOOL)indicator footIsNeedDrag:(BOOL)footIsNeedDrag mjheadBlock:(void (^)(void))mjheadBlock mjfootBlock:(void (^)(void))mjfootBlock{
     
     UITableView *tableView = [[UITableView alloc]initWithFrame:frame style:style];
     if (@available(iOS 11.0, *)) {
         tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
+    tableView.showsVerticalScrollIndicator = indicator;
     //非常重要关闭预估高度，避免新系统UI刷新错位
     tableView.estimatedRowHeight = 0;
     tableView.estimatedSectionFooterHeight = 0;
@@ -112,13 +113,14 @@
     }
     return tableView;
 }
-//
-+(UITableView *)UITableViewWithBackgroundColor:(UIColor *)color frame:(CGRect )frame separatorStyle:(UITableViewCellSeparatorStyle )separatorStyle style:(UITableViewStyle)style contentInset:(UIEdgeInsets )contentInset{
+//UITableView
++(UITableView *)UITableViewWithBackgroundColor:(UIColor *)color frame:(CGRect )frame separatorStyle:(UITableViewCellSeparatorStyle )separatorStyle style:(UITableViewStyle)style contentInset:(UIEdgeInsets )contentInset indicator:(BOOL)indicator{
     
     UITableView *tableView = [[UITableView alloc]initWithFrame:frame style:style];
     if (@available(iOS 11.0, *)) {
         tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
+    tableView.showsVerticalScrollIndicator = indicator;
     //非常重要关闭预估高度，避免新系统UI刷新错位
     tableView.estimatedRowHeight = 0;
     tableView.estimatedSectionFooterHeight = 0;
