@@ -260,7 +260,7 @@
     label.font = [UIFont systemFontOfSize:fontSize];
     return label;
 }
-//
+//UIControl
 +(UIControl *)UIControlFrame:(CGRect )frame backgroundColor:(UIColor *)backgroundColor tag:(int)tag target:(id)target action:(SEL)action{
     UIControl *control = [[UIControl alloc]initWithFrame:frame];
     control.backgroundColor = backgroundColor;
@@ -732,6 +732,11 @@
         return nil;
     }
     return dic;
+}
+//替换去除字符
++(NSString *)removeStrWithContent:(NSString *)content removeStr:(NSString *)removeStr replaceStr:(NSString *)replaceStr{
+    content = [content stringByReplacingOccurrencesOfString:removeStr withString:replaceStr];
+    return content;
 }
 
 @end

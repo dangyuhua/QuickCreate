@@ -112,4 +112,6 @@
 +(NSString *)dictionaryToJsonString:(NSDictionary *)dict;
 //JSON字符串转化为字典
 + (NSDictionary *)jsonStringToWithDictionary:(NSString *)jsonString;
+//替换去除字符
++(NSString *)removeStrWithContent:(NSString *)content removeStr:(NSString *)removeStr replaceStr:(NSString *)replaceStr;
 @end
