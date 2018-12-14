@@ -467,7 +467,11 @@
     CGFloat h = [string boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:fontSize]} context:nil].size.width;
     return h;
 }
-
+//计算字符串长高度
++(CGSize)calculatedString:(NSString *)string WithSize:(CGSize)size font:(CGFloat)fontSize{
+    CGSize s = [string boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:fontSize]} context:nil].size;
+    return s;
+}
 
 // 根据图片url获取图片尺寸
 +(CGSize)getImageSizeWithURL:(id)imageURL

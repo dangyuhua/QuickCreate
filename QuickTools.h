@@ -67,7 +67,8 @@
 +(CGFloat)calculatedStringHeight:(NSString *)string WithSize:(CGSize)size font:(CGFloat)fontSize;
 //计算字符串宽度
 +(CGFloat)calculatedStringWidth:(NSString *)string WithSize:(CGSize)size font:(CGFloat)fontSize;
-
+//计算字符串长高度
++(CGSize)calculatedString:(NSString *)string WithSize:(CGSize)size font:(CGFloat)fontSize;
 // 根据图片url获取图片尺寸
 +(CGSize)getImageSizeWithURL:(id)imageURL;
 //获得目前时间
