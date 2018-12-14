@@ -19,15 +19,11 @@
 //导航栏按钮
 +(UIBarButtonItem *)UIBarButtonItemBarButtonWithTarget:(id)target action:(SEL)action frame:(CGRect )frame title:(NSString *)title image:(NSString *)image selectImage:(NSString *)selectImage font:(CGFloat)font textColor:(UIColor *)textColor edgeInsets:(UIEdgeInsets)edgeInsets;
 //上拉下拉tableview
-+(UITableView *)UITableViewMJRefreshWithBackgroundColor:(UIColor *)color frame:(CGRect )frame separatorStyle:(UITableViewCellSeparatorStyle )separatorStyle style:(UITableViewStyle)style contentInset:(UIEdgeInsets )contentInset indicator:(BOOL)indicator footIsNeedDrag:(BOOL)footIsNeedDrag mjheadBlock:(void (^)(void))mjheadBlock mjfootBlock:(void (^)(void))mjfootBlock;
-//
-+(UITableView *)UITableViewWithBackgroundColor:(UIColor *)color frame:(CGRect )frame separatorStyle:(UITableViewCellSeparatorStyle )separatorStyle style:(UITableViewStyle)style contentInset:(UIEdgeInsets )contentInset indicator:(BOOL)indicator;
++(UITableView *)UITableViewMJRefreshWithBackgroundColor:(UIColor *)color frame:(CGRect )frame separatorStyle:(UITableViewCellSeparatorStyle )separatorStyle style:(UITableViewStyle)style contentInset:(UIEdgeInsets )contentInset indicator:(BOOL)indicator isRefresh:(BOOL)isRefresh footIsNeedDrag:(BOOL)footIsNeedDrag mjheadBlock:(void (^)(void))mjheadBlock mjfootBlock:(void (^)(void))mjfootBlock;
 //通过data获取image,可获取image大小
 +(UIImage *)UIImageWithimageURL:(NSString *)imageURL;
 //UICollectionView
-+(UICollectionView *)UICollectionViewWithFrame:(CGRect)frame scrollDirection:(UICollectionViewScrollDirection )scrollDirection itemSize:(CGSize )itemSize minimumLineSpacing:(CGFloat )minimumLineSpacing minimumInteritemSpacing:(CGFloat )minimumInteritemSpacing backgroundColor:(UIColor *)backgroundColor scrollEnabled:(BOOL )scrollEnabled pagingEnabled:(BOOL )pagingEnabled showsScrollIndicator:(BOOL )showsScrollIndicator contentInset:(UIEdgeInsets )contentInset;
-//UICollectionView
-+(UICollectionView *)UICollectionViewMJRefreshWithFrame:(CGRect)frame scrollDirection:(UICollectionViewScrollDirection )scrollDirection itemSize:(CGSize )itemSize minimumLineSpacing:(CGFloat )minimumLineSpacing minimumInteritemSpacing:(CGFloat )minimumInteritemSpacing backgroundColor:(UIColor *)backgroundColor scrollEnabled:(BOOL )scrollEnabled pagingEnabled:(BOOL )pagingEnabled showsScrollIndicator:(BOOL )showsScrollIndicator contentInset:(UIEdgeInsets )contentInset footerLabelLeftInset:(CGFloat)inset mjfootBlock:(void (^)(void))mjfootBlock;
++(UICollectionView *)UICollectionViewMJRefreshWithFrame:(CGRect)frame scrollDirection:(UICollectionViewScrollDirection )scrollDirection itemSize:(CGSize )itemSize minimumLineSpacing:(CGFloat )minimumLineSpacing minimumInteritemSpacing:(CGFloat )minimumInteritemSpacing backgroundColor:(UIColor *)backgroundColor scrollEnabled:(BOOL )scrollEnabled pagingEnabled:(BOOL )pagingEnabled showsScrollIndicator:(BOOL )showsScrollIndicator contentInset:(UIEdgeInsets )contentInset footerLabelLeftInset:(CGFloat)inset isRefresh:(BOOL)isRefresh mjheadBlock:(void (^)(void))mjheadBlock mjfootBlock:(void (^)(void))mjfootBlock;
 //解决含有UICollectionView的vc手势返回冲突
 +(UICollectionView *)UICollectionViewConflictWithVCBack:(UICollectionView *)collectionview vc:(UIViewController *)vc;
 //UIScrollView

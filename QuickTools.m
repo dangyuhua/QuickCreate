@@ -70,7 +70,7 @@
 }
 
 //上拉下拉tableview
-+(UITableView *)UITableViewMJRefreshWithBackgroundColor:(UIColor *)color frame:(CGRect )frame separatorStyle:(UITableViewCellSeparatorStyle )separatorStyle style:(UITableViewStyle)style contentInset:(UIEdgeInsets )contentInset indicator:(BOOL)indicator footIsNeedDrag:(BOOL)footIsNeedDrag mjheadBlock:(void (^)(void))mjheadBlock mjfootBlock:(void (^)(void))mjfootBlock{
++(UITableView *)UITableViewMJRefreshWithBackgroundColor:(UIColor *)color frame:(CGRect )frame separatorStyle:(UITableViewCellSeparatorStyle )separatorStyle style:(UITableViewStyle)style contentInset:(UIEdgeInsets )contentInset indicator:(BOOL)indicator isRefresh:(BOOL)isRefresh footIsNeedDrag:(BOOL)footIsNeedDrag mjheadBlock:(void (^)(void))mjheadBlock mjfootBlock:(void (^)(void))mjfootBlock{
     
     UITableView *tableView = [[UITableView alloc]initWithFrame:frame style:style];
     if (@available(iOS 11.0, *)) {
@@ -84,50 +84,35 @@
     tableView.separatorStyle = separatorStyle;
     tableView.backgroundColor = color;
     tableView.contentInset = contentInset;
-    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        mjheadBlock();
-    }];
-    header.lastUpdatedTimeLabel.hidden = YES;
-    header.stateLabel.hidden = YES;
-    tableView.mj_header = header;
-    if (footIsNeedDrag) {
-        MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-            mjfootBlock();
+    if (isRefresh) {
+        MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            mjheadBlock();
         }];
-        footer.labelLeftInset = 0;
-        [footer setTitle:@"" forState:MJRefreshStateIdle];
-        [footer setTitle:@"" forState:MJRefreshStateWillRefresh];
-        [footer setTitle:@"" forState:MJRefreshStateRefreshing];
-        [footer setTitle:@"" forState:MJRefreshStateNoMoreData];
-        tableView.mj_footer = footer;
-    }else{
-        MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-            mjfootBlock();
-        }];
-        footer.labelLeftInset = 0;
-        [footer setTitle:@"" forState:MJRefreshStateIdle];
-        [footer setTitle:@"" forState:MJRefreshStateWillRefresh];
-        [footer setTitle:@"" forState:MJRefreshStateRefreshing];
-        [footer setTitle:@"" forState:MJRefreshStateNoMoreData];
-        tableView.mj_footer = footer;
+        header.lastUpdatedTimeLabel.hidden = YES;
+        header.stateLabel.hidden = YES;
+        tableView.mj_header = header;
+        if (footIsNeedDrag) {
+            MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+                mjfootBlock();
+            }];
+            footer.labelLeftInset = 0;
+            [footer setTitle:@"" forState:MJRefreshStateIdle];
+            [footer setTitle:@"" forState:MJRefreshStateWillRefresh];
+            [footer setTitle:@"" forState:MJRefreshStateRefreshing];
+            [footer setTitle:@"" forState:MJRefreshStateNoMoreData];
+            tableView.mj_footer = footer;
+        }else{
+            MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+                mjfootBlock();
+            }];
+            footer.labelLeftInset = 0;
+            [footer setTitle:@"" forState:MJRefreshStateIdle];
+            [footer setTitle:@"" forState:MJRefreshStateWillRefresh];
+            [footer setTitle:@"" forState:MJRefreshStateRefreshing];
+            [footer setTitle:@"" forState:MJRefreshStateNoMoreData];
+            tableView.mj_footer = footer;
+        }
     }
-    return tableView;
-}
-//UITableView
-+(UITableView *)UITableViewWithBackgroundColor:(UIColor *)color frame:(CGRect )frame separatorStyle:(UITableViewCellSeparatorStyle )separatorStyle style:(UITableViewStyle)style contentInset:(UIEdgeInsets )contentInset indicator:(BOOL)indicator{
-    
-    UITableView *tableView = [[UITableView alloc]initWithFrame:frame style:style];
-    if (@available(iOS 11.0, *)) {
-        tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-    }
-    tableView.showsVerticalScrollIndicator = indicator;
-    //非常重要关闭预估高度，避免新系统UI刷新错位
-    tableView.estimatedRowHeight = 0;
-    tableView.estimatedSectionFooterHeight = 0;
-    tableView.estimatedSectionHeaderHeight = 0;
-    tableView.separatorStyle = separatorStyle;
-    tableView.backgroundColor = color;
-    tableView.contentInset = contentInset;
     return tableView;
 }
 //通过data获取image,可获取image大小
@@ -136,82 +121,42 @@
     return image;
 }
 //UICollectionView
-+(UICollectionView *)UICollectionViewWithFrame:(CGRect)frame scrollDirection:(UICollectionViewScrollDirection )scrollDirection itemSize:(CGSize )itemSize minimumLineSpacing:(CGFloat )minimumLineSpacing minimumInteritemSpacing:(CGFloat )minimumInteritemSpacing backgroundColor:(UIColor *)backgroundColor scrollEnabled:(BOOL )scrollEnabled pagingEnabled:(BOOL )pagingEnabled showsScrollIndicator:(BOOL )showsScrollIndicator contentInset:(UIEdgeInsets )contentInset{
-    
++(UICollectionView *)UICollectionViewMJRefreshWithFrame:(CGRect)frame scrollDirection:(UICollectionViewScrollDirection )scrollDirection itemSize:(CGSize )itemSize minimumLineSpacing:(CGFloat )minimumLineSpacing minimumInteritemSpacing:(CGFloat )minimumInteritemSpacing backgroundColor:(UIColor *)backgroundColor scrollEnabled:(BOOL )scrollEnabled pagingEnabled:(BOOL )pagingEnabled showsScrollIndicator:(BOOL )showsScrollIndicator contentInset:(UIEdgeInsets )contentInset footerLabelLeftInset:(CGFloat)inset isRefresh:(BOOL)isRefresh mjheadBlock:(void (^)(void))mjheadBlock mjfootBlock:(void (^)(void))mjfootBlock{
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    
     flowLayout.scrollDirection = scrollDirection;
-    
     flowLayout.itemSize = itemSize;
-    
     flowLayout.minimumLineSpacing = minimumLineSpacing;
-    
     flowLayout.minimumInteritemSpacing = minimumInteritemSpacing;
-    
     UICollectionView *collectionview = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:flowLayout];
-    
     if (@available(iOS 11.0, *)) {
         collectionview.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
-    
     collectionview.backgroundColor = backgroundColor;
-    
     collectionview.scrollEnabled = scrollEnabled;
-    
     collectionview.pagingEnabled = pagingEnabled;
-    
     if (scrollDirection == UICollectionViewScrollDirectionVertical) {
         collectionview.showsVerticalScrollIndicator = showsScrollIndicator;
     }else{
         collectionview.showsHorizontalScrollIndicator = showsScrollIndicator;
     }
     collectionview.contentInset = contentInset;
-    
-    return collectionview;
-}
-
-//UICollectionView
-+(UICollectionView *)UICollectionViewMJRefreshWithFrame:(CGRect)frame scrollDirection:(UICollectionViewScrollDirection )scrollDirection itemSize:(CGSize )itemSize minimumLineSpacing:(CGFloat )minimumLineSpacing minimumInteritemSpacing:(CGFloat )minimumInteritemSpacing backgroundColor:(UIColor *)backgroundColor scrollEnabled:(BOOL )scrollEnabled pagingEnabled:(BOOL )pagingEnabled showsScrollIndicator:(BOOL )showsScrollIndicator contentInset:(UIEdgeInsets )contentInset footerLabelLeftInset:(CGFloat)inset mjfootBlock:(void (^)(void))mjfootBlock{
-    
-    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    
-    flowLayout.scrollDirection = scrollDirection;
-    
-    flowLayout.itemSize = itemSize;
-    
-    flowLayout.minimumLineSpacing = minimumLineSpacing;
-    
-    flowLayout.minimumInteritemSpacing = minimumInteritemSpacing;
-    
-    UICollectionView *collectionview = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:flowLayout];
-    
-    if (@available(iOS 11.0, *)) {
-        collectionview.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    if (isRefresh) {
+        MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            mjheadBlock();
+        }];
+        header.lastUpdatedTimeLabel.hidden = YES;
+        header.stateLabel.hidden = YES;
+        collectionview.mj_header = header;
+        MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+            mjfootBlock();
+        }];
+        footer.labelLeftInset = inset;
+        [footer setTitle:@"" forState:MJRefreshStateIdle];
+        [footer setTitle:@"" forState:MJRefreshStateWillRefresh];
+        [footer setTitle:@"" forState:MJRefreshStateRefreshing];
+        [footer setTitle:@"" forState:MJRefreshStateNoMoreData];
+        collectionview.mj_footer = footer;
     }
-    
-    collectionview.backgroundColor = backgroundColor;
-    
-    collectionview.scrollEnabled = scrollEnabled;
-    
-    collectionview.pagingEnabled = pagingEnabled;
-    
-    if (scrollDirection == UICollectionViewScrollDirectionVertical) {
-        collectionview.showsVerticalScrollIndicator = showsScrollIndicator;
-    }else{
-        collectionview.showsHorizontalScrollIndicator = showsScrollIndicator;
-    }
-    collectionview.contentInset = contentInset;
-    
-    MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-        mjfootBlock();
-    }];
-    footer.labelLeftInset = inset;
-    [footer setTitle:@"" forState:MJRefreshStateIdle];
-    [footer setTitle:@"" forState:MJRefreshStateWillRefresh];
-    [footer setTitle:@"" forState:MJRefreshStateRefreshing];
-    [footer setTitle:@"" forState:MJRefreshStateNoMoreData];
-    collectionview.mj_footer = footer;
-    
     return collectionview;
 }
 //解决含有UICollectionView的vc手势返回冲突
