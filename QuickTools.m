@@ -70,7 +70,7 @@
 }
 
 //上拉下拉tableview
-+(UITableView *)UITableViewMJRefreshWithBackgroundColor:(UIColor *)color frame:(CGRect )frame separatorStyle:(UITableViewCellSeparatorStyle )separatorStyle style:(UITableViewStyle)style contentInset:(UIEdgeInsets )contentInset indicator:(BOOL)indicator isRefresh:(BOOL)isRefresh footIsNeedDrag:(BOOL)footIsNeedDrag mjheadBlock:(void (^)(void))mjheadBlock mjfootBlock:(void (^)(void))mjfootBlock{
++(UITableView *)UITableViewMJRefreshWithBackgroundColor:(UIColor *)color frame:(CGRect )frame separatorStyle:(UITableViewCellSeparatorStyle )separatorStyle style:(UITableViewStyle)style contentInset:(UIEdgeInsets )contentInset indicator:(BOOL)indicator isRefresh:(BOOL)isRefresh footerIsNeedDrag:(BOOL)footerIsNeedDrag mjheadBlock:(void (^)(void))mjheadBlock mjfootBlock:(void (^)(void))mjfootBlock{
     UITableView *tableView = [[UITableView alloc]initWithFrame:frame style:style];
     if (@available(iOS 11.0, *)) {
         tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
@@ -90,7 +90,7 @@
         header.lastUpdatedTimeLabel.hidden = YES;
         header.stateLabel.hidden = YES;
         tableView.mj_header = header;
-        if (footIsNeedDrag) {
+        if (footerIsNeedDrag) {
             MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
                 mjfootBlock();
             }];
@@ -153,8 +153,9 @@
         }];
         footer.labelLeftInset = inset;
         [footer setTitle:@"" forState:MJRefreshStateIdle];
-        [footer setTitle:@"" forState:MJRefreshStateWillRefresh];
+        [footer setTitle:@"" forState:MJRefreshStatePulling];
         [footer setTitle:@"" forState:MJRefreshStateRefreshing];
+        [footer setTitle:@"" forState:MJRefreshStateWillRefresh];
         [footer setTitle:@"" forState:MJRefreshStateNoMoreData];
         collectionview.mj_footer = footer;
     }
