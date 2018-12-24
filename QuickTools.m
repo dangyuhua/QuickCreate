@@ -122,7 +122,7 @@
     return image;
 }
 //UICollectionView
-+(UICollectionView *)UICollectionViewMJRefreshWithFrame:(CGRect)frame scrollDirection:(UICollectionViewScrollDirection )scrollDirection itemSize:(CGSize )itemSize minimumLineSpacing:(CGFloat )minimumLineSpacing minimumInteritemSpacing:(CGFloat )minimumInteritemSpacing backgroundColor:(UIColor *)backgroundColor scrollEnabled:(BOOL )scrollEnabled pagingEnabled:(BOOL )pagingEnabled showsScrollIndicator:(BOOL )showsScrollIndicator contentInset:(UIEdgeInsets )contentInset footerLabelLeftInset:(CGFloat)inset isRefresh:(BOOL)isRefresh mjheadBlock:(void (^)(void))mjheadBlock mjfootBlock:(void (^)(void))mjfootBlock{
++(UICollectionView *)UICollectionViewMJRefreshWithFrame:(CGRect)frame scrollDirection:(UICollectionViewScrollDirection )scrollDirection itemSize:(CGSize )itemSize minimumLineSpacing:(CGFloat )minimumLineSpacing minimumInteritemSpacing:(CGFloat )minimumInteritemSpacing backgroundColor:(UIColor *)backgroundColor scrollEnabled:(BOOL )scrollEnabled pagingEnabled:(BOOL )pagingEnabled showsScrollIndicator:(BOOL )showsScrollIndicator contentInset:(UIEdgeInsets )contentInset footerLabelLeftInset:(CGFloat)inset isRefresh:(BOOL)isRefresh footerIsNeedDrag:(BOOL)footerIsNeedDrag mjheadBlock:(void (^)(void))mjheadBlock mjfootBlock:(void (^)(void))mjfootBlock{
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.scrollDirection = scrollDirection;
     flowLayout.itemSize = itemSize;
@@ -148,16 +148,29 @@
         header.lastUpdatedTimeLabel.hidden = YES;
         header.stateLabel.hidden = YES;
         collectionview.mj_header = header;
-        MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-            mjfootBlock();
-        }];
-        footer.labelLeftInset = inset;
-        [footer setTitle:@"" forState:MJRefreshStateIdle];
-        [footer setTitle:@"" forState:MJRefreshStatePulling];
-        [footer setTitle:@"" forState:MJRefreshStateRefreshing];
-        [footer setTitle:@"" forState:MJRefreshStateWillRefresh];
-        [footer setTitle:@"" forState:MJRefreshStateNoMoreData];
-        collectionview.mj_footer = footer;
+        if (footerIsNeedDrag) {
+            MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+                mjfootBlock();
+            }];
+            footer.labelLeftInset = 0;
+            [footer setTitle:@"" forState:MJRefreshStateIdle];
+            [footer setTitle:@"" forState:MJRefreshStatePulling];
+            [footer setTitle:@"" forState:MJRefreshStateRefreshing];
+            [footer setTitle:@"" forState:MJRefreshStateWillRefresh];
+            [footer setTitle:@"" forState:MJRefreshStateNoMoreData];
+            collectionview.mj_footer = footer;
+        }else{
+            MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+                mjfootBlock();
+            }];
+            footer.labelLeftInset = 0;
+            [footer setTitle:@"" forState:MJRefreshStateIdle];
+            [footer setTitle:@"" forState:MJRefreshStatePulling];
+            [footer setTitle:@"" forState:MJRefreshStateRefreshing];
+            [footer setTitle:@"" forState:MJRefreshStateWillRefresh];
+            [footer setTitle:@"" forState:MJRefreshStateNoMoreData];
+            collectionview.mj_footer = footer;
+        }
     }
     return collectionview;
 }
