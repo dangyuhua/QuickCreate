@@ -37,7 +37,7 @@
 //
 +(UITextField *)UITextFieldWithFrame:(CGRect )frame cornerRadius:(CGFloat )r font:(CGFloat)font borderStyle:(UITextBorderStyle )borderStyle backgroundColor:(UIColor *)bgcolor placeholder:(NSString *)placeholder attributes:(NSDictionary<NSAttributedStringKey, id> *)attrs returnKeyType:(UIReturnKeyType)returnKeyType leftview:(UIView *)leftview rightView:(UIView *)rightView clearButtonMode:(UITextFieldViewMode )clearButtonMode keyboardType:(UIKeyboardType )keyboardType;
 //
-+(UIImageView *)UIImageViewWithFrame:(CGRect )frame image:(NSString *)image;
++(UIImageView *)UIImageViewWithFrame:(CGRect )frame image:(id)image;
 //
 +(UILabel *)UILabelWithFrame:(CGRect )frame backgroundColor:(UIColor *)backgroundColor textColor:(UIColor *)textColor text:(NSString *)text numberOfLines:(NSInteger)numberOfLines textAlignment:(NSTextAlignment )textAlignment font:(CGFloat)fontSize;
 //UISearchController
@@ -111,4 +111,6 @@
 + (NSDictionary *)jsonStringToWithDictionary:(NSString *)jsonString;
 //替换去除字符
 +(NSString *)removeStrWithContent:(NSString *)content removeStr:(NSString *)removeStr replaceStr:(NSString *)replaceStr;
+//获取启动图
++(UIImage *)getLaunchImage;
 @end
