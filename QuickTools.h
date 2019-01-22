@@ -12,105 +12,106 @@
 
 @interface QuickTools : NSObject
 
-//UIButton
+#pragma mark UIButton
 +(UIButton *)UIButtonWithFrame:(CGRect )frame backgroundColor:(UIColor *)backgroundColor title:(NSString *)title image:(NSString *)image selectImage:(NSString *)selectImage font:(CGFloat)font textColor:(UIColor *)textColor selectTextColor:(UIColor *)selectTextColor edgeInsets:(UIEdgeInsets )edgeInsets tag:(NSInteger)tag target:(id)target action:(SEL)action;
-//导航栏返回按钮
+#pragma mark 导航栏返回按钮
 +(UIBarButtonItem *)UIBarButtonItemNavBackBarButtonItemWithTarget:(id)target action:(SEL)action;
-//导航栏按钮
+#pragma mark 导航栏按钮
 +(UIBarButtonItem *)UIBarButtonItemBarButtonWithTarget:(id)target action:(SEL)action frame:(CGRect )frame title:(NSString *)title image:(NSString *)image selectImage:(NSString *)selectImage font:(CGFloat)font textColor:(UIColor *)textColor edgeInsets:(UIEdgeInsets)edgeInsets;
-//上拉下拉tableview
+#pragma mark 上拉下拉tableview
 +(UITableView *)UITableViewMJRefreshWithBackgroundColor:(UIColor *)color frame:(CGRect )frame separatorStyle:(UITableViewCellSeparatorStyle )separatorStyle style:(UITableViewStyle)style contentInset:(UIEdgeInsets )contentInset indicator:(BOOL)indicator isRefresh:(BOOL)isRefresh footerIsNeedDrag:(BOOL)footerIsNeedDrag mjheadBlock:(void (^)(void))mjheadBlock mjfootBlock:(void (^)(void))mjfootBlock;
-//通过data获取image,可获取image大小
+#pragma mark 通过data获取image,可获取image大小
 +(UIImage *)UIImageWithimageURL:(NSString *)imageURL;
-//UICollectionView
+#pragma mark UICollectionView
 +(UICollectionView *)UICollectionViewMJRefreshWithFrame:(CGRect)frame scrollDirection:(UICollectionViewScrollDirection )scrollDirection itemSize:(CGSize )itemSize minimumLineSpacing:(CGFloat )minimumLineSpacing minimumInteritemSpacing:(CGFloat )minimumInteritemSpacing backgroundColor:(UIColor *)backgroundColor scrollEnabled:(BOOL )scrollEnabled pagingEnabled:(BOOL )pagingEnabled showsScrollIndicator:(BOOL )showsScrollIndicator contentInset:(UIEdgeInsets )contentInset footerLabelLeftInset:(CGFloat)inset isRefresh:(BOOL)isRefresh footerIsNeedDrag:(BOOL)footerIsNeedDrag mjheadBlock:(void (^)(void))mjheadBlock mjfootBlock:(void (^)(void))mjfootBlock;
-//解决含有UICollectionView的vc手势返回冲突
+#pragma mark 解决含有UICollectionView的vc手势返回冲突
 +(UICollectionView *)UICollectionViewConflictWithVCBack:(UICollectionView *)collectionview vc:(UIViewController *)vc;
-//UIScrollView
+#pragma mark UIScrollView
 + (UIScrollView *)UIScrollViewWithFrame:(CGRect )frame backgroundColor:(UIColor *)bgcolor size:(CGSize )size isPagingEnable:(BOOL )isPage isBounces:(BOOL )isBounces scrollEnabled:(BOOL )scrollEnabled isShowVerticalIndicator:(BOOL )isShowVIndicator isShowsHorizontalScrollIndicator:(BOOL )isShowHIndicator;
-//解决含有scrollview的vc手势返回冲突
+#pragma mark 解决含有scrollview的vc手势返回冲突
 +(UIScrollView *)UIScrollViewConflictWithVCBack:(UIScrollView *)scrollview vc:(UIViewController *)vc;
-//
+#pragma mark
 +(UIView *)UIViewWithFrame:(CGRect )frame backgroundColor:(UIColor *)backgroundColor;
-//
+#pragma mark
 +(UITextView *)UITextViewithFrame:(CGRect )frame backgroundColor:(UIColor *)backgroundColor content:(NSString *)content font:(CGFloat)fontSize textColor:(UIColor *)textColor;
-//
+#pragma mark
 +(UITextField *)UITextFieldWithFrame:(CGRect )frame cornerRadius:(CGFloat )r font:(CGFloat)font borderStyle:(UITextBorderStyle )borderStyle backgroundColor:(UIColor *)bgcolor placeholder:(NSString *)placeholder attributes:(NSDictionary<NSAttributedStringKey, id> *)attrs returnKeyType:(UIReturnKeyType)returnKeyType leftview:(UIView *)leftview rightView:(UIView *)rightView clearButtonMode:(UITextFieldViewMode )clearButtonMode keyboardType:(UIKeyboardType )keyboardType;
-//
+#pragma mark
 +(UIImageView *)UIImageViewWithFrame:(CGRect )frame image:(id)image;
-//
+#pragma mark
 +(UILabel *)UILabelWithFrame:(CGRect )frame backgroundColor:(UIColor *)backgroundColor textColor:(UIColor *)textColor text:(NSString *)text numberOfLines:(NSInteger)numberOfLines textAlignment:(NSTextAlignment )textAlignment font:(CGFloat)fontSize;
-//UISearchController
+#pragma mark UISearchController
 +(UISearchController *)UISearchControllerWithSearchResultsController:(UIViewController *)searchResultsController frame:(CGRect )frame;
-//WKWebView
+#pragma mark WKWebView
 +(WKWebView *)WKWebViewWithFrame:(CGRect )frame url:(NSString *)url;
-//UIActivityIndicatorView
+#pragma mark UIActivityIndicatorView
 +(UIActivityIndicatorView *)UIActivityIndicatorViewWithFrame:(CGRect )frame activityIndicatorViewStyle:(UIActivityIndicatorViewStyle) activityIndicatorViewStyle;
+#pragma mark
 +(NSAttributedString *)NSAttributedStringWithIndex1:(NSInteger )index1 index2:(NSInteger )index2 string:(NSString *)string color:(UIColor *)color font:(CGFloat)font;
-//尚未确定
+#pragma mark 尚未确定
 +(UIControl *)TopImageBottomStringWithFrame:(CGRect)frame image:(NSString *)image imageurl:(NSString *)imageurl placeholderImage:(NSString *)placeholderImage name:(NSString *)name font:(CGFloat)font textColor:(UIColor *)textColor tag:(NSInteger)tag target:(id)target action:(SEL)action;
-//下载图片
+#pragma mark 下载图片
 +(UIImageView *)SDWebImageSetImage:(UIImageView *)imageview url:(NSString *)imageURL placeholderImage:(NSString *)placeholderImage;
-//图片渐显
+#pragma mark 图片渐显
 +(UIImageView *)SDWebImageFadeInImageView:(UIImageView *)imageview url:(NSString *)url placeholderImage:(NSString *)placeholderImage;
-//下载图片(需要获取frame的)
+#pragma mark 下载图片(需要获取frame的)
 +(UIImageView *)SDWebImageNeedFrame:(UIImageView *)imageview url:(NSString *)imageURL placeholderImage:(NSString *)placeholderImage;
-//截取字符串
+#pragma mark 截取字符串
 +(NSString *)cutoutNSString:(NSString *)str range:(NSInteger )index;
-//
+#pragma mark
 +(UIControl *)UIControlFrame:(CGRect )frame backgroundColor:(UIColor *)backgroundColor tag:(int)tag target:(id)target action:(SEL)action;
-//计算字符串高度
+#pragma mark 计算字符串高度
 +(CGFloat)calculatedStringHeight:(NSString *)string WithSize:(CGSize)size font:(CGFloat)fontSize;
-//计算字符串宽度
+#pragma mark 计算字符串宽度
 +(CGFloat)calculatedStringWidth:(NSString *)string WithSize:(CGSize)size font:(CGFloat)fontSize;
-//计算字符串长高度
+#pragma mark 计算字符串长高度
 +(CGSize)calculatedString:(NSString *)string WithSize:(CGSize)size font:(CGFloat)fontSize;
-// 根据图片url获取图片尺寸
+#pragma mark  根据图片url获取图片尺寸
 +(CGSize)getImageSizeWithURL:(id)imageURL;
-//获得目前时间
+#pragma mark 获得目前时间
 +(NSString *)getCurrentDateFormatter:(NSString *)dateFormat;
-//获取某个时间与现在时间差
+#pragma mark 获取某个时间与现在时间差
 +(NSInteger)getTimeDifferenceWithNowTime:(NSString*)nowTime endTime:(NSString*)endTime;
-//数字字符串转成时间字符串
+#pragma mark 数字字符串转成时间字符串
 +(NSString *)NumberTimeChangeString:(NSString *)time;
-//string时间转数字时间戳
+#pragma mark string时间转数字时间戳
 +(NSString *)StringDateToNSIntergeTime:(NSString*)time;
-//获取目前的VC
+#pragma mark 获取目前的VC
 + (UIViewController *)getCurrentVC;
-//用途比如推送跳转
+#pragma mark 用途比如推送跳转
 + (UINavigationController *)getCurrentNav;
-//设置NSAttributedString颜色
+#pragma mark 设置NSAttributedString颜色
 +(NSMutableAttributedString *)NSMutableAttributedStringColorConfigText:(NSString *)text textColor:(UIColor *)textColor range:(NSRange)range;
-//震动
+#pragma mark 震动
 +(void)playVibrate;
-//image转data
+#pragma mark image转data
 +(NSData *)UIImageExchangeNSData:(UIImage *)image;
-//data转image
+#pragma mark data转image
 +(UIImage *)NSDataExchangeUIImage:(NSData *)data;
-//相机相册调用
+#pragma mark 相机相册调用
 +(UIImagePickerController *)UIImagePickerControllerWithAllowsEditing:(BOOL)allowsEditing sourceType:(UIImagePickerControllerSourceType) sourceType;
-//点按
+#pragma mark 点按
 +(UITapGestureRecognizer *)UITapGestureRecognizerWithTarget:(id)target action:(SEL)action;
-//长按
+#pragma mark 长按
 +(UILongPressGestureRecognizer *)UILongPressGestureRecognizerWithTarget:(id)target action:(SEL)action;
-//轻扫
+#pragma mark 轻扫
 +(UISwipeGestureRecognizer *)UISwipeGestureRecognizerWithTarget:(id)target action:(SEL)action direction:(UISwipeGestureRecognizerDirection)direction;
-//旋转
+#pragma mark 旋转
 +(UIRotationGestureRecognizer *)UIRotationGestureRecognizerWithTarget:(id)target action:(SEL)action;
-//捏合
+#pragma mark 捏合
 +(UIPinchGestureRecognizer *)UIPinchGestureRecognizerWithTarget:(id)target action:(SEL)action;
-//拖拽
+#pragma mark 拖拽
 +(UIPanGestureRecognizer *)UIPanGestureRecognizerWithTarget:(id)target action:(SEL)action;
-//FPS检测 //流畅度
+#pragma mark FPS检测 //流畅度
 +(void)FPSLabel;
-// 返回虚线image的方法
+#pragma mark 返回虚线image的方法
 +(UIImage *)drawLineByImageView:(UIImageView *)imageView lineColor:(UIColor *)color;
-//字典转JSON字符串
+#pragma mark 字典转JSON字符串
 +(NSString *)dictionaryToJsonString:(NSDictionary *)dict;
-//JSON字符串转化为字典
+#pragma mark JSON字符串转化为字典
 + (NSDictionary *)jsonStringToWithDictionary:(NSString *)jsonString;
-//替换去除字符
+#pragma mark 替换去除字符
 +(NSString *)removeStrWithContent:(NSString *)content removeStr:(NSString *)removeStr replaceStr:(NSString *)replaceStr;
-//获取启动图
+#pragma mark 获取启动图
 +(UIImage *)getLaunchImage;
 @end

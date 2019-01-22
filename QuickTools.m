@@ -29,7 +29,7 @@
     });
     return manager;
 }
-//UIButton
+#pragma mark UIButton
 +(UIButton *)UIButtonWithFrame:(CGRect )frame backgroundColor:(UIColor *)backgroundColor title:(NSString *)title image:(NSString *)image selectImage:(NSString *)selectImage font:(CGFloat)font textColor:(UIColor *)textColor selectTextColor:(UIColor *)selectTextColor edgeInsets:(UIEdgeInsets )edgeInsets tag:(NSInteger)tag target:(id)target action:(SEL)action{
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.backgroundColor = backgroundColor;
@@ -50,14 +50,14 @@
     return button;
 }
 
-//导航栏返回按钮
+#pragma mark 导航栏返回按钮
 +(UIBarButtonItem *)UIBarButtonItemNavBackBarButtonItemWithTarget:(id)target action:(SEL)action{
     UIButton *button = [self UIButtonWithFrame:CGRectMake(0, 0, 28, 32) backgroundColor:clearColor title:nil image:@"general_back" selectImage:nil font:0 textColor:clearColor selectTextColor:clearColor edgeInsets:Edge(0, 0, 0, 8) tag:0 target:target action:action];
     UIBarButtonItem *backBar = [[UIBarButtonItem alloc]initWithCustomView:button];
     return backBar;
 }
 
-//导航栏按钮
+#pragma mark 导航栏按钮
 +(UIBarButtonItem *)UIBarButtonItemBarButtonWithTarget:(id)target action:(SEL)action frame:(CGRect )frame title:(NSString *)title image:(NSString *)image selectImage:(NSString *)selectImage font:(CGFloat)font textColor:(UIColor *)textColor edgeInsets:(UIEdgeInsets)edgeInsets{
     UIButton *button = [self UIButtonWithFrame:frame backgroundColor:clearColor title:title image:image selectImage:selectImage font:font textColor:textColor selectTextColor:textColor edgeInsets:Edge(0, 0, 0, 0) tag:0 target:target action:action];
     if (title != nil) {
@@ -69,7 +69,7 @@
     return barButton;
 }
 
-//上拉下拉tableview
+#pragma mark 上拉下拉tableview
 +(UITableView *)UITableViewMJRefreshWithBackgroundColor:(UIColor *)color frame:(CGRect )frame separatorStyle:(UITableViewCellSeparatorStyle )separatorStyle style:(UITableViewStyle)style contentInset:(UIEdgeInsets )contentInset indicator:(BOOL)indicator isRefresh:(BOOL)isRefresh footerIsNeedDrag:(BOOL)footerIsNeedDrag mjheadBlock:(void (^)(void))mjheadBlock mjfootBlock:(void (^)(void))mjfootBlock{
     UITableView *tableView = [[UITableView alloc]initWithFrame:frame style:style];
     if (@available(iOS 11.0, *)) {
@@ -116,12 +116,12 @@
     }
     return tableView;
 }
-//通过data获取image,可获取image大小
+#pragma mark 通过data获取image,可获取image大小
 +(UIImage *)UIImageWithimageURL:(NSString *)imageURL{
     UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageURL]]];
     return image;
 }
-//UICollectionView
+#pragma mark UICollectionView
 +(UICollectionView *)UICollectionViewMJRefreshWithFrame:(CGRect)frame scrollDirection:(UICollectionViewScrollDirection )scrollDirection itemSize:(CGSize )itemSize minimumLineSpacing:(CGFloat )minimumLineSpacing minimumInteritemSpacing:(CGFloat )minimumInteritemSpacing backgroundColor:(UIColor *)backgroundColor scrollEnabled:(BOOL )scrollEnabled pagingEnabled:(BOOL )pagingEnabled showsScrollIndicator:(BOOL )showsScrollIndicator contentInset:(UIEdgeInsets )contentInset footerLabelLeftInset:(CGFloat)inset isRefresh:(BOOL)isRefresh footerIsNeedDrag:(BOOL)footerIsNeedDrag mjheadBlock:(void (^)(void))mjheadBlock mjfootBlock:(void (^)(void))mjfootBlock{
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.scrollDirection = scrollDirection;
@@ -174,7 +174,7 @@
     }
     return collectionview;
 }
-//解决含有UICollectionView的vc手势返回冲突
+#pragma mark 解决含有UICollectionView的vc手势返回冲突
 +(UICollectionView *)UICollectionViewConflictWithVCBack:(UICollectionView *)collectionview vc:(UIViewController *)vc{
     NSArray *gestureArray = vc.navigationController.view.gestureRecognizers;
     for (UIGestureRecognizer *gestureRecognizer in gestureArray) {
@@ -185,7 +185,7 @@
     return collectionview;
 }
 
-//UIScrollView
+#pragma mark UIScrollView
 + (UIScrollView *)UIScrollViewWithFrame:(CGRect )frame backgroundColor:(UIColor *)bgcolor size:(CGSize )size isPagingEnable:(BOOL )isPage isBounces:(BOOL )isBounces scrollEnabled:(BOOL )scrollEnabled isShowVerticalIndicator:(BOOL )isShowVIndicator isShowsHorizontalScrollIndicator:(BOOL )isShowHIndicator{
     
     UIScrollView *scrollview = [[UIScrollView alloc]initWithFrame:frame];
@@ -198,7 +198,7 @@
     scrollview.showsHorizontalScrollIndicator = isShowHIndicator;
     return scrollview;
 }
-//解决含有scrollview的vc手势返回冲突
+#pragma mark 解决含有scrollview的vc手势返回冲突
 +(UIScrollView *)UIScrollViewConflictWithVCBack:(UIScrollView *)scrollview vc:(UIViewController *)vc{
     NSArray *gestureArray = vc.navigationController.view.gestureRecognizers;
     for (UIGestureRecognizer *gestureRecognizer in gestureArray) {
@@ -208,7 +208,7 @@
     }
     return scrollview;
 }
-//
+#pragma mark UILabel
 +(UILabel *)UILabelWithFrame:(CGRect )frame backgroundColor:(UIColor *)backgroundColor textColor:(UIColor *)textColor text:(NSString *)text numberOfLines:(NSInteger)numberOfLines textAlignment:(NSTextAlignment )textAlignment font:(CGFloat)fontSize{
     UILabel *label = [[UILabel alloc]init];
     label.backgroundColor = backgroundColor;
@@ -220,7 +220,7 @@
     label.font = [UIFont systemFontOfSize:fontSize];
     return label;
 }
-//UIControl
+#pragma mark UIControl
 +(UIControl *)UIControlFrame:(CGRect )frame backgroundColor:(UIColor *)backgroundColor tag:(int)tag target:(id)target action:(SEL)action{
     UIControl *control = [[UIControl alloc]initWithFrame:frame];
     control.backgroundColor = backgroundColor;
@@ -228,14 +228,14 @@
     [control addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     return control;
 }
-//
+#pragma mark UIView
 +(UIView *)UIViewWithFrame:(CGRect )frame backgroundColor:(UIColor *)backgroundColor{
     UIView *view = [[UIView alloc]init];
     view.backgroundColor = backgroundColor;
     view.frame = frame;
     return view;
 }
-//
+#pragma mark UITextView
 +(UITextView *)UITextViewithFrame:(CGRect )frame backgroundColor:(UIColor *)backgroundColor content:(NSString *)content font:(CGFloat)fontSize textColor:(UIColor *)textColor{
     UITextView *textview = [[UITextView alloc]init];
     textview.backgroundColor = backgroundColor;
@@ -250,7 +250,7 @@
     textview.userInteractionEnabled = NO;
     return textview;
 }
-
+#pragma mark UIImageView
 +(UIImageView *)UIImageViewWithFrame:(CGRect )frame image:(id)image{
     UIImageView *imageView = [[UIImageView alloc]init];
     imageView.frame = frame;
@@ -263,7 +263,7 @@
     }
     return imageView;
 }
-
+#pragma mark UITextField
 +(UITextField *)UITextFieldWithFrame:(CGRect )frame cornerRadius:(CGFloat )r font:(CGFloat)font borderStyle:(UITextBorderStyle )borderStyle backgroundColor:(UIColor *)bgcolor placeholder:(NSString *)placeholder attributes:(NSDictionary<NSAttributedStringKey, id> *)attrs returnKeyType:(UIReturnKeyType)returnKeyType leftview:(UIView *)leftview rightView:(UIView *)rightView clearButtonMode:(UITextFieldViewMode )clearButtonMode keyboardType:(UIKeyboardType )keyboardType{
     UITextField *tf = [[UITextField alloc]initWithFrame:frame];
     tf.layer.cornerRadius = r;
@@ -283,7 +283,7 @@
     tf.keyboardType = keyboardType;
     return tf;
 }
-
+#pragma mark UISearchController
 +(UISearchController *)UISearchControllerWithSearchResultsController:(UIViewController *)searchResultsController frame:(CGRect )frame{
     UISearchController *searchController = [[UISearchController alloc]initWithSearchResultsController:searchResultsController];
     searchController.searchBar.frame = frame;
@@ -301,18 +301,19 @@
     
     return searchController;
 }
-//WKWebView
+#pragma mark WKWebView
 +(WKWebView *)WKWebViewWithFrame:(CGRect )frame url:(NSString *)url{
     WKWebView *webView = [[WKWebView alloc] initWithFrame:frame];
     [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:5.0]];
     return webView;
 }
-//UIActivityIndicatorView
+#pragma mark UIActivityIndicatorView
 +(UIActivityIndicatorView *)UIActivityIndicatorViewWithFrame:(CGRect )frame activityIndicatorViewStyle:(UIActivityIndicatorViewStyle) activityIndicatorViewStyle{
     UIActivityIndicatorView *indicatorView = [[UIActivityIndicatorView alloc]initWithFrame:frame];
     indicatorView.activityIndicatorViewStyle = activityIndicatorViewStyle;
     return indicatorView;
 }
+#pragma mark NSAttributedString
 +(NSAttributedString *)NSAttributedStringWithIndex1:(NSInteger )index1 index2:(NSInteger )index2 string:(NSString *)string color:(UIColor *)color font:(CGFloat)font{
     NSString *str1 = string;
     NSMutableAttributedString *str2 = [[NSMutableAttributedString alloc] initWithString: str1];
@@ -320,7 +321,7 @@
     [str2 addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:font] range:NSMakeRange(index1,index2)];
     return str2;
 }
-//尚未确定
+#pragma mark 尚未确定
 +(UIControl *)TopImageBottomStringWithFrame:(CGRect)frame image:(NSString *)image imageurl:(NSString *)imageurl placeholderImage:(NSString *)placeholderImage name:(NSString *)name font:(CGFloat)font textColor:(UIColor *)textColor tag:(NSInteger)tag target:(id)target action:(SEL)action{
     UIControl *control = [[UIControl alloc]init];
     control.backgroundColor = clearColor;
@@ -335,7 +336,7 @@
     [control addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     return control;
 }
-//数字字符串转成时间字符串
+#pragma mark 数字字符串转成时间字符串
 +(NSString *)NumberTimeChangeString:(NSString *)time{
     
     NSInteger num = [time integerValue];
@@ -345,7 +346,7 @@
     NSString * comfromTimeStr = [formatter stringFromDate:confromTime];
     return comfromTimeStr;
 }
-//获得目前时间
+#pragma mark 获得目前时间
 +(NSString *)getCurrentDateFormatter:(NSString *)dateFormat{
     
     NSDate *now = [NSDate date];
@@ -355,7 +356,7 @@
     
     return dayStr;
 }
-//获取某个时间与现在时间差
+#pragma mark 获取某个时间与现在时间差
 +(NSInteger)getTimeDifferenceWithNowTime:(NSString*)nowTime endTime:(NSString*)endTime {
     
     NSInteger timeDifference = 0;
@@ -369,7 +370,7 @@
     
     return timeDifference;
 }
-//string时间转数字时间戳
+#pragma mark string时间转数字时间戳
 +(NSString *)StringDateToNSIntergeTime:(NSString*)time{
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yy-MM-dd HH:mm:ss"];
@@ -378,13 +379,13 @@
     NSString *numtimestr = [NSString stringWithFormat:@"%ld",(long)numtime];
     return numtimestr;
 }
-//下载图片
+#pragma mark 下载图片
 +(UIImageView *)SDWebImageSetImage:(UIImageView *)imageview url:(NSString *)imageURL placeholderImage:(NSString *)placeholderImage{
     
     [imageview sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:[UIImage imageNamed:placeholderImage]];
     return imageview;
 }
-//图片渐显
+#pragma mark 图片渐显
 +(UIImageView *)SDWebImageFadeInImageView:(UIImageView *)imageview url:(NSString *)url placeholderImage:(NSString *)placeholderImage{
     //从缓存中取图片
     //UIImage *image = [[SDImageCache sharedImageCache]imageFromDiskCacheForKey:url];
@@ -405,7 +406,7 @@
     }];
     return imageview;
 }
-//下载图片(需要获取frame的)
+#pragma mark 下载图片(需要获取frame的)
 +(UIImageView *)SDWebImageNeedFrame:(UIImageView *)imageview url:(NSString *)imageURL placeholderImage:(NSString *)placeholderImage{
     [imageview sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:[UIImage imageNamed:placeholderImage] options:SDWebImageRetryFailed completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
         CGSize size = image.size;
@@ -415,29 +416,29 @@
     }];
     return imageview;
 }
-//截取字符串
+#pragma mark 截取字符串
 +(NSString *)cutoutNSString:(NSString *)str range:(NSInteger )index{
     str = [str substringToIndex:index];
     return str;
 }
 
-//计算字符串高度
+#pragma mark 计算字符串高度
 +(CGFloat)calculatedStringHeight:(NSString *)string WithSize:(CGSize)size font:(CGFloat)fontSize{
     CGFloat h = [string boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:fontSize]} context:nil].size.height;
     return h;
 }
-//计算字符串宽度
+#pragma mark 计算字符串宽度
 +(CGFloat)calculatedStringWidth:(NSString *)string WithSize:(CGSize)size font:(CGFloat)fontSize{
     CGFloat h = [string boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:fontSize]} context:nil].size.width;
     return h;
 }
-//计算字符串长高度
+#pragma mark 计算字符串长高度
 +(CGSize)calculatedString:(NSString *)string WithSize:(CGSize)size font:(CGFloat)fontSize{
     CGSize s = [string boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:fontSize]} context:nil].size;
     return s;
 }
 
-// 根据图片url获取图片尺寸
+#pragma mark 根据图片url获取图片尺寸
 +(CGSize)getImageSizeWithURL:(id)imageURL
 {
     NSURL* URL = nil;
@@ -474,7 +475,7 @@
     }
     return size;
 }
-//  获取PNG图片的大小
+#pragma mark 获取PNG图片的大小
 +(CGSize)getPNGImageSizeWithRequest:(NSMutableURLRequest*)request
 {
     [request setValue:@"bytes=16-23" forHTTPHeaderField:@"Range"];
@@ -497,7 +498,7 @@
     }
     return CGSizeZero;
 }
-//  获取gif图片的大小
+#pragma mark  获取gif图片的大小
 +(CGSize)getGIFImageSizeWithRequest:(NSMutableURLRequest*)request
 {
     [request setValue:@"bytes=6-9" forHTTPHeaderField:@"Range"];
@@ -516,7 +517,7 @@
     }
     return CGSizeZero;
 }
-//  获取jpg图片的大小
+#pragma mark 获取jpg图片的大小
 +(CGSize)getJPGImageSizeWithRequest:(NSMutableURLRequest*)request
 {
     [request setValue:@"bytes=0-209" forHTTPHeaderField:@"Range"];
@@ -567,40 +568,40 @@
         }
     }
 }
-//获取目前的VC
+#pragma mark 获取目前的VC
 + (UIViewController *)getCurrentVC{
     UITabBarController *tab = (UITabBarController *)WIN.rootViewController;
     UINavigationController *nav = (UINavigationController *)tab.selectedViewController;
     return nav.topViewController;
 }
-//用途比如推送跳转
+#pragma mark 用途比如推送跳转
 + (UINavigationController *)getCurrentNav{
     UITabBarController *tab = (UITabBarController *)WIN.rootViewController;
     UINavigationController *nav = (UINavigationController *)tab.selectedViewController;
     return nav;
 }
-//设置NSAttributedString颜色
+#pragma mark 设置NSAttributedString颜色
 +(NSMutableAttributedString *)NSMutableAttributedStringColorConfigText:(NSString *)text textColor:(UIColor *)textColor range:(NSRange)range{
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:text];
     [attr setAttributes:@{NSForegroundColorAttributeName : textColor} range:range];
     return attr;
 }
-//震动
+#pragma mark 震动
 +(void)playVibrate{
     AudioServicesPlaySystemSound(1007);
     AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
 }
-//image转data
+#pragma mark image转data
 +(NSData *)UIImageExchangeNSData:(UIImage *)image{
     NSData *data = UIImagePNGRepresentation(image);
     return data;
 }
-//data转image
+#pragma mark data转image
 +(UIImage *)NSDataExchangeUIImage:(NSData *)data{
     UIImage *image = [UIImage imageWithData: data];
     return image;
 }
-//相机相册调用
+#pragma mark 相机相册调用
 +(UIImagePickerController *)UIImagePickerControllerWithAllowsEditing:(BOOL)allowsEditing sourceType:(UIImagePickerControllerSourceType) sourceType{
     UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
     imagePickerController.allowsEditing = allowsEditing;
@@ -612,44 +613,44 @@
     imagePickerController.navigationBar.translucent = NO;//去除毛玻璃效果
     return imagePickerController;
 }
-//点按
+#pragma mark 点按
 +(UITapGestureRecognizer *)UITapGestureRecognizerWithTarget:(id)target action:(SEL)action{
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:target action:action];
     return tap;
 }
-//长按
+#pragma mark 长按
 +(UILongPressGestureRecognizer *)UILongPressGestureRecognizerWithTarget:(id)target action:(SEL)action{
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:target action:action];
     return longPress;
 }
-//轻扫
+#pragma mark 轻扫
 +(UISwipeGestureRecognizer *)UISwipeGestureRecognizerWithTarget:(id)target action:(SEL)action direction:(UISwipeGestureRecognizerDirection)direction{
     UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:target action:action];
     swipe.direction = direction;
     return swipe;
 }
-//旋转
+#pragma mark 旋转
 +(UIRotationGestureRecognizer *)UIRotationGestureRecognizerWithTarget:(id)target action:(SEL)action{
     UIRotationGestureRecognizer *rotation = [[UIRotationGestureRecognizer alloc] initWithTarget:target action:action];
     return rotation;
 }
-//捏合
+#pragma mark 捏合
 +(UIPinchGestureRecognizer *)UIPinchGestureRecognizerWithTarget:(id)target action:(SEL)action{
     UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:target action:action];
     return pinch;
 }
-//拖拽
+#pragma mark 拖拽
 +(UIPanGestureRecognizer *)UIPanGestureRecognizerWithTarget:(id)target action:(SEL)action{
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:target action:action];
     return pan;
 }
-//FPS检测 //流畅度
+#pragma mark FPS检测 //流畅度
 +(void)FPSLabel{
     FPSLabel *fpsLabel = [[FPSLabel alloc]initWithFrame:Frame(ScreenW-100, kTopBarHeight+20, 80, 30)];
     [WIN addSubview:fpsLabel];
 }
 
-// 返回虚线image的方法
+#pragma mark 返回虚线image的方法
 +(UIImage *)drawLineByImageView:(UIImageView *)imageView lineColor:(UIColor *)color{
     UIGraphicsBeginImageContext(imageView.frame.size); //开始画线 划线的frame
     [imageView.image drawInRect:CGRectMake(0, 0, imageView.frame.size.width, imageView.frame.size.height)];
@@ -668,7 +669,7 @@
     // UIGraphicsGetImageFromCurrentImageContext()返回的就是image
     return UIGraphicsGetImageFromCurrentImageContext();
 }
-//字典转Json字符串
+#pragma mark 字典转Json字符串
 +(NSString *)dictionaryToJsonString:(NSDictionary *)dict{
     NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&error];
@@ -687,7 +688,7 @@
     [mutStr replaceOccurrencesOfString:@"\n" withString:@"" options:NSLiteralSearch range:range2];
     return mutStr;
 }
-//JSON字符串转化为字典
+#pragma mark JSON字符串转化为字典
 + (NSDictionary *)jsonStringToWithDictionary:(NSString *)jsonString{
     if (jsonString == nil) {
         return nil;
@@ -701,12 +702,12 @@
     }
     return dic;
 }
-//替换去除字符
+#pragma mark 替换去除字符
 +(NSString *)removeStrWithContent:(NSString *)content removeStr:(NSString *)removeStr replaceStr:(NSString *)replaceStr{
     content = [content stringByReplacingOccurrencesOfString:removeStr withString:replaceStr];
     return content;
 }
-//获取启动图
+#pragma mark 获取启动图
 +(UIImage *)getLaunchImage{
     UIImage *lauchImage  = nil;
     NSString *viewOrientation = nil;
