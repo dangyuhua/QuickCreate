@@ -683,7 +683,7 @@
     }
     return lauchImage;
 }
-#pragma mark 文字转码
+#pragma mark 文字转码(中文)
 +(NSString *)NSStringTranscodingWithText:(NSString *)text{
     return [text stringByRemovingPercentEncoding];
 }

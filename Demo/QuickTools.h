@@ -104,6 +104,6 @@
 +(NSString *)removeStrWithContent:(NSString *)content removeStr:(NSString *)removeStr replaceStr:(NSString *)replaceStr;
 #pragma mark 获取启动图
 +(UIImage *)getLaunchImage;
-#pragma mark 文字转码
+#pragma mark 文字转码(中文)
 +(NSString *)NSStringTranscodingWithText:(NSString *)text;
 @end
